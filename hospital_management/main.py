@@ -2,7 +2,7 @@ import flet as ft
 
 from utils.config import APP_TITLE
 from utils.db_utils import Database
-# from gui.login_page import LoginPage
+from gui.login_page import LoginPage
 
 
 class HospitalApp:
