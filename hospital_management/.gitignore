@@ -1,0 +1,7 @@
+# Ignore database and caches
+database/hospital.db
+__pycache__/
+*.pyc
+# Ignore temporary test scripts
+test_config.py
+test_db.py
