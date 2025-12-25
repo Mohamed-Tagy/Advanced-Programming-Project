@@ -36,16 +36,27 @@ class Doctor:
         else:
             return f"Patient {patient_name} (ID: {patient_id}) is not registered with this doctor"
     
-    def schedule_appointment(self, appointment_id):
-        """Schedule a new appointment"""
-        self.appointments.append(appointment_id)
+    def schedule_appointment(self, appointment_id, appointment_date):
+        """Schedule a new appointment with date checking"""
+        
+        # Single loop checking both conditions
+        for existing_id, existing_date in self.appointments:
+            if existing_id == appointment_id:
+                return f"Appointment ID {appointment_id} already exists"
+            if existing_date == appointment_date:
+                return f"Date {appointment_date} is already booked with appointment {existing_id}"
+        
+        # Schedule the appointment
+        self.appointments.append((appointment_id, appointment_date))
+        return f"Appointment ID {appointment_id} scheduled for {appointment_date}"
     
     def cancel_appointment(self, appointment_id):
         """Cancel an existing appointment"""
-        if appointment_id in self.appointments:
-            self.appointments.remove(appointment_id)
-            return True
-        return False
+        for i, (app_id, date) in enumerate(self.appointments):
+            if app_id == appointment_id:
+                self.appointments.pop(i)
+                return f"Appointment ID {appointment_id} scheduled for {date} has been cancelled"
+        return f"Appointment ID {appointment_id} not found in schedule"
     
     def get_patient_count(self):
         """Get number of patients under doctor's care"""
