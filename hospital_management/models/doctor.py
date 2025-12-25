@@ -9,19 +9,32 @@ class Doctor:
         self.patients = []  # List of patient IDs assigned to this doctor
         self.appointments = []  # List of appointment IDs
     
-    def add_patient(self, patient_id):
-        """Add a patient to doctor's care list"""
-        if patient_id not in self.patients:
+    def add_patient(self, patient_id, patient_name, condition_code):
+        """Add a patient to doctor's care list with their medical condition"""
+        
+        # Common medical condition codes (expand as needed)
+        condition_codes = {
+            'BLACK': 'Critical/Emergency',
+            'RED': 'Immediate/Life-threatening', 
+            'YELLOW': 'Urgent',
+            'GREEN': 'Minor/Non-urgent',
+            'WHITE': 'Discharged/Non-acute'
+        }
+        
+        if patient_id in self.patients:
+            return f"Patient {patient_name} (ID: {patient_id}) is already registered"
+        else:
             self.patients.append(patient_id)
-            return True
-        return False
-    
-    def remove_patient(self, patient_id):
+            condition_desc = condition_codes.get(condition_code.upper(), 'Unknown condition')
+            return f"Patient {patient_name} (ID: {patient_id}) with condition {condition_code} ({condition_desc}) has been registered"
+
+    def remove_patient(self, patient_id, patient_name):
         """Remove a patient from doctor's care list"""
         if patient_id in self.patients:
             self.patients.remove(patient_id)
-            return True
-        return False
+            return f"Patient {patient_name} (ID: {patient_id}) has been removed"
+        else:
+            return f"Patient {patient_name} (ID: {patient_id}) is not registered with this doctor"
     
     def schedule_appointment(self, appointment_id):
         """Schedule a new appointment"""
