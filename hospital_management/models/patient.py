@@ -17,7 +17,6 @@ class Patient(Person):
         self.__discharge_date = None
         self.__assigned_doctor = None
 
-        # ---- INITIAL DATA HANDLING (YOUR LOGIC PRESERVED) ----
         if allergies is not None:
             if isinstance(allergies, str):
                 self.__allergies.append(allergies)
@@ -29,8 +28,6 @@ class Patient(Person):
                 self.__medical_history.append(medical_history)
             else:
                 self.__medical_history.extend(medical_history)
-
-    # ----------------- YOUR METHODS (UNCHANGED LOGIC) -----------------
 
     def admit(self, admission_date, doctor_id):
         self.__admission_date = admission_date
@@ -78,8 +75,6 @@ class Patient(Person):
         if self.__admission_date:
             return f"Patient {self.name} is currently admitted (since {self.__admission_date})"
         return f"Patient {self.name} is not admitted"
-
-    # ----------------- REQUIRED BY PERSON -----------------
 
     def to_dict(self):
         return {
