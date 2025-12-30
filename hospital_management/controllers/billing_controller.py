@@ -24,8 +24,8 @@ class BillingController(BaseController):
             raise ValueError("Bill not found")
         return bill.add_charge(amount, description)
 
-    def apply_discount(self, bill_id, percentage, reason=""):
+    def get_bill_summary(self, bill_id):
         bill = self.get(bill_id)
         if not bill:
             raise ValueError("Bill not found")
-        return bill.apply_discount(percentage, reason)
+        return bill.get_bill_summary()
