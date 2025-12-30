@@ -1,64 +1,28 @@
 class Billing:
-    """Billing class for hospital payments"""
-    
     def __init__(self, bill_id, patient_id, patient_name, amount, service_description=""):
         self.bill_id = bill_id
         self.patient_id = patient_id
         self.patient_name = patient_name
         self.amount = amount
         self.service_description = service_description
-        self.payment_status = "Pending"  # Pending, Paid, Partially Paid, Overdue
-        self.payment_date = None
-        self.payment_method = ""
+        self.payment_status = "Pending"  # Simple: Pending or Paid
+        self.paid_amount = 0  # How much has been paid so far
     
-    def make_payment(self, amount_paid, payment_method="Cash", payment_date=""):
+    def make_payment(self, amount_paid):
         """Record a payment"""
         if amount_paid <= 0:
             return "Payment amount must be positive"
         
-        if amount_paid > self.amount:
-            return f"Payment (${amount_paid}) exceeds bill amount (${self.amount})"
+        # Add to what's been paid
+        self.paid_amount += amount_paid
         
-        self.amount -= amount_paid
-        self.payment_method = payment_method
-        
-        if payment_date:
-            self.payment_date = payment_date
+        # Check if fully paid
+        if self.paid_amount >= self.amount:
+            self.payment_status = "Paid"
+            return f"Bill {self.bill_id} is now fully paid!"
         else:
-            from datetime import datetime
-            self.payment_date = datetime.now().strftime("%Y-%m-%d")
-        
-        if self.amount == 0:
-            self.payment_status = "Fully Paid"
-        else:
-            self.payment_status = "Partially Paid"
-        
-        return (f"Payment of ${amount_paid} received from {self.patient_name}\n"
-                f"Remaining balance: ${self.amount}\n"
-                f"Status: {self.payment_status}")
-    
-    def add_charge(self, additional_amount, description=""):
-        """Add additional charge to bill"""
-        self.amount += additional_amount
-        
-        if description:
-            self.service_description += f"; {description}"
-        
-        if self.payment_status == "Fully Paid":
-            self.payment_status = "Pending"
-        
-        return f"Added ${additional_amount} charge. New total: ${self.amount}"
-    
-    def apply_discount(self, discount_percentage, reason=""):
-        """Apply discount to bill"""
-        if discount_percentage <= 0 or discount_percentage > 100:
-            return "Discount percentage must be between 1-100"
-        
-        discount_amount = (self.amount * discount_percentage) / 100
-        self.amount -= discount_amount
-        
-        discount_note = f" ({reason})" if reason else ""
-        return f"Applied {discount_percentage}% discount{discount_note}. New total: ${self.amount:.2f}"
+            remaining = self.amount - self.paid_amount
+            return f"Payment received. ${remaining} still owed."
     
     def get_bill_summary(self):
         """Get billing summary"""
