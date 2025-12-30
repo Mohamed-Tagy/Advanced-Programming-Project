@@ -1,5 +1,5 @@
-from main import Admin
-from main import BaseController
+from models.admin import Admin
+from controllers.base_controller import BaseController
 
 class AdminController(BaseController):
     def create_admin(self, admin_id, name, age, gender,

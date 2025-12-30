@@ -1,4 +1,4 @@
-from models import Person
+from models.person import Person
 
 class Staff(Person):
     def __init__(self, staff_id, name, age, gender, role,
