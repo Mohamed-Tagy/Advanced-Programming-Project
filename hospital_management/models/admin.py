@@ -1,10 +1,10 @@
-from models.staff import Staff
+from models.person import Person
 
-class Admin(Staff):
-    def __init__(self, staff_id, name, age, gender,
+class Admin(Person):
+    def __init__(self, admin_id, name, age, gender,
                  phone=None, email=None, address=None):
-        super().__init__(staff_id, name, age, gender, "Admin", phone, email, address)
-        self.__permissions = []   # private (security-critical)
+        super().__init__(admin_id, name, age, gender, phone, email, address)
+        self.__permissions = []
 
     def add_permission(self, permission):
         if permission not in self.__permissions:
@@ -18,8 +18,8 @@ class Admin(Staff):
         return permission in self.__permissions
 
     def to_dict(self):
-        data = super().to_dict()
-        data.update({
-            "permissions": list(self.__permissions)  # safe copy
-        })
-        return data
+        return {
+            "id": self.person_id,
+            "name": self.name,
+            "permissions": list(self.__permissions)
+        }
