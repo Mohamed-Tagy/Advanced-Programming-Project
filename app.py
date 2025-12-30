@@ -1,13 +1,14 @@
 import flet as ft
-from gui.pages.login_page import login_page
-from gui.pages.signup_page import signup_page
-from gui.pages.user_dashboard import user_dashboard
-from gui.pages.admin_dashboard import admin_dashboard
-from gui.pages.appointment_page import appointments_page
-from gui.pages.doctor_page import doctors_page
-from gui.pages.patient_page import patients_page
-from gui.pages.billing_page import billing_page
 
+# ---------------- Pages ----------------
+from gui.pages.login_page import LoginPage
+from gui.pages.signup_page import SignupPage
+from gui.pages.user_dashboard import UserDashboard
+from gui.pages.admin_dashboard import AdminDashboard
+from gui.pages.appointment_page import AppointmentPage  # الاسم الصح
+from gui.pages.doctor_page import DoctorsPage
+from gui.pages.patient_page import PatientsPage
+from gui.pages.billing_page import BillingPage
 
 def main(page: ft.Page):
     page.title = "Hospital Management System"
@@ -37,42 +38,42 @@ def main(page: ft.Page):
 
         # ---------- Public Pages ----------
         if page.route == "/":
-            page.views.append(login_page(page))
+            page.views.append(LoginPage(page).build())
         elif page.route == "/signup":
-            page.views.append(signup_page(page))
+            page.views.append(SignupPage(page).build())
 
         # ---------- User Pages ----------
         elif page.route in ["/user-dashboard", "/user-doctors", "/user-appointments"]:
             if not require_login():
                 return
-            page.views.append(user_dashboard(page))
+            page.views.append(UserDashboard(page).build())
 
         # ---------- Admin Pages ----------
         elif page.route == "/admin-dashboard":
             if not require_login() or not require_admin():
                 return
-            page.views.append(admin_dashboard(page))
+            page.views.append(AdminDashboard(page).build())
         elif page.route == "/appointments":
-            if not require_login():
+            if not require_login() or not require_admin():
                 return
-            page.views.append(appointments_page(page))
+            page.views.append(AppointmentPage(page).build())  # الاسم الصح
         elif page.route == "/doctors":
             if not require_login() or not require_admin():
                 return
-            page.views.append(doctors_page(page))
+            page.views.append(DoctorsPage(page).build())
         elif page.route == "/patients":
             if not require_login() or not require_admin():
                 return
-            page.views.append(patients_page(page))
+            page.views.append(PatientsPage(page).build())
         elif page.route == "/billing":
             if not require_login() or not require_admin():
                 return
-            page.views.append(billing_page(page))
+            page.views.append(BillingPage(page).build())
 
         page.update()
 
     page.on_route_change = route_change
     page.go("/")
 
-
+# ---------- Run App ----------
 ft.app(target=main)
