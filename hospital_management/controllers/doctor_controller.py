@@ -10,8 +10,9 @@ class DoctorController(BaseController):
             raise ValueError("Doctor already exists")
 
         doctor = Doctor(
-            doctor_id, name, age, gender, specialty,
-            license_number, phone, email, address
+            doctor_id, name, age, gender,
+            specialty, license_number,
+            phone, email, address
         )
         self._items[doctor_id] = doctor
         return doctor
@@ -20,16 +21,26 @@ class DoctorController(BaseController):
         doctor = self.get(doctor_id)
         if not doctor:
             raise ValueError("Doctor not found")
-        doctor.add_patient(patient_id)
+
+        if not doctor.add_patient(patient_id):
+            raise ValueError("Patient already assigned to this doctor")
+
+        return True
 
     def remove_patient(self, doctor_id, patient_id):
         doctor = self.get(doctor_id)
         if not doctor:
             raise ValueError("Doctor not found")
-        doctor.remove_patient(patient_id)
+
+        if not doctor.remove_patient(patient_id):
+            raise ValueError("Patient not assigned to this doctor")
+
+        return True
 
     def set_fee(self, doctor_id, fee):
         doctor = self.get(doctor_id)
         if not doctor:
             raise ValueError("Doctor not found")
+
         doctor.set_consultation_fee(fee)
+        return True
