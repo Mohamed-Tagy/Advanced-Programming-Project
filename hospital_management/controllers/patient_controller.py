@@ -1,6 +1,7 @@
 from models.patient import Patient
+from controllers.base_controller import BaseController
 
-class PatientController:
+class PatientController(BaseController):
     def __init__(self):
         self.patients = {}   # patient_id -> Patient object
 
