@@ -1,5 +1,5 @@
-from main import Nurse
-from main import BaseController
+from models.nurse import Nurse
+from controllers.base_controller import BaseController
 
 class NurseController(BaseController):
     def create_nurse(self, nurse_id, name, age, gender,
