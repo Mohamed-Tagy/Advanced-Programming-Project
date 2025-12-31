@@ -1,33 +1,63 @@
 import unittest
-import os
+from hospital_management.controllers.patient_controller import PatientController
+from hospital_management.models.patient import Patient
+from hospital_management.controllers.base_controller import BaseController
 from hospital_management.database.db_manager import Database
-from hospital_management.database import schema
+from hospital_management.models.person import Person
 
-TEST_DB = os.path.join(os.path.dirname(__file__), "test_hospital.db")
 
-class TestPatientDB(unittest.TestCase):
+class TestPatientController(unittest.TestCase):
+    def setUp(self):
+        self.controller = PatientController()
 
-    @classmethod
-    def setUpClass(cls):
-        global DB_FILE
-        DB_FILE = TEST_DB  
-        cls.db = Database()  
+    def test_create_and_get_patient(self):
+        patient = self.controller.create_patient(
+            patient_id="P001",
+            name="John Doe",
+            age=30,
+            gender="M",
+            blood_type="A+"
+        )
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.db.close()
-        if os.path.exists(TEST_DB):
-            os.remove(TEST_DB)
+        self.assertEqual(patient.person_id, "P001")
+        self.assertEqual(patient.name, "John Doe")
 
-    def test_insert_and_fetch_patient(self):
-        insert_query = "INSERT INTO patients (id, name, age) VALUES (?, ?, ?)"
-        self.db.execute(insert_query, (1, "Ahmed", 25))
+        fetched_patient = self.controller.get_patient("P001")
+        self.assertEqual(fetched_patient.name, "John Doe")
+        self.assertEqual(fetched_patient.blood_type, "A+")
 
-        select_query = "SELECT * FROM patients WHERE id = ?"
-        patient = self.db.fetchone(select_query, (1,))
-        self.assertIsNotNone(patient)
-        self.assertEqual(patient[1], "Ahmed")
-        self.assertEqual(patient[2], 25)
+    def test_admit_and_discharge(self):
+        self.controller.create_patient(
+            patient_id="P002",
+            name="Jane Doe",
+            age=25,
+            gender="F",
+            blood_type="B+"
+        )
+
+        self.controller.admit_patient("P002", "2025-12-31", "D001")
+        patient = self.controller.get_patient("P002")
+        self.assertTrue(patient.is_admitted())
+
+        self.controller.discharge_patient("P002", "2026-01-02", "D001")
+        patient = self.controller.get_patient("P002")
+        self.assertFalse(patient.is_admitted())
+
+    def test_allergy_and_history(self):
+        self.controller.create_patient(
+            patient_id="P003",
+            name="Alice",
+            age=28,
+            gender="F",
+            blood_type="O+"
+        )
+
+        self.controller.add_allergy("P003", "Peanuts")
+        self.controller.add_medical_history("P003", "Asthma")
+
+        patient = self.controller.get_patient("P003")
+        self.assertIn("Peanuts", patient.to_dict()["allergies"])
+        self.assertIn("Asthma", patient.to_dict()["medical_history"])
 
 if __name__ == "__main__":
     unittest.main()

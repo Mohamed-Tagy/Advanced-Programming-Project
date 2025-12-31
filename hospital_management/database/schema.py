@@ -1,14 +1,17 @@
-# database/schema.py
-
 PATIENT_TABLE = """
 CREATE TABLE IF NOT EXISTS patients (
     patient_id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     age INTEGER,
     gender TEXT,
+    phone TEXT,
+    email TEXT,
+    address TEXT,
     blood_type TEXT,
     allergies TEXT,
     medical_history TEXT,
+    medical_notes TEXT,
+    admitted INTEGER DEFAULT 0,
     admission_date TEXT,
     discharge_date TEXT,
     assigned_doctor TEXT
@@ -16,6 +19,34 @@ CREATE TABLE IF NOT EXISTS patients (
 """
 
 STAFF_TABLE = """
+CREATE TABLE IF NOT EXISTS staff (
+    staff_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    gender TEXT,
+    role TEXT,
+    specialty TEXT,
+    license_number TEXT,
+    department TEXT,
+    permissions TEXT
+);
+"""
+
+DOCTOR_TABLE = """
+CREATE TABLE IF NOT EXISTS staff (
+    staff_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    gender TEXT,
+    role TEXT,
+    specialty TEXT,
+    license_number TEXT,
+    department TEXT,
+    permissions TEXT
+);
+"""
+
+ADMIN_TABLE = """
 CREATE TABLE IF NOT EXISTS staff (
     staff_id TEXT PRIMARY KEY,
     name TEXT NOT NULL,

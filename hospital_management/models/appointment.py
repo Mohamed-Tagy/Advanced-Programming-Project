@@ -103,6 +103,20 @@ class Appointment:
                 f"Reason: {self.reason}\n"
                 f"Status: {self.status}\n"
                 f"Notes: {self.notes if self.notes else 'No notes'}")
+    def to_dict(self):
+        """Return appointment as dict for easy printing / database insertion"""
+        return {
+            "appointment_id": self.appointment_id,
+            "patient_id": self.patient_id,
+            "doctor_id": self.doctor_id,
+            "date": self.appointment_date,
+            "time": self.appointment_time,
+            "reason": self.reason,
+            "status": self.status,
+            "notes": self.notes,
+            "outcome": self.outcome,
+            "outcome_type": self.outcome_type
+        }
     
     def __str__(self):
         return f"Appointment {self.appointment_id}: {self.patient_id} with Dr. {self.doctor_id} on {self.appointment_date}"

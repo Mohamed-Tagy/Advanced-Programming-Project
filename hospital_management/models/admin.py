@@ -1,4 +1,4 @@
-from models.person import Person
+from hospital_management.models.person import Person
 
 class Admin(Person):
     def __init__(self, admin_id, name, age, gender,

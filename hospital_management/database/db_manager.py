@@ -1,6 +1,6 @@
 # database/db_manager.py
 import sqlite3
-from database import schema
+from hospital_management.database import schema
 
 DB_FILE = "hospital.db"
 
@@ -13,6 +13,8 @@ class Database:
     def create_tables(self):
         self.cursor.execute(schema.PATIENT_TABLE)
         self.cursor.execute(schema.STAFF_TABLE)
+        self.cursor.execute(schema.DOCTOR_TABLE)
+        self.cursor.execute(schema.ADMIN_TABLE)
         self.cursor.execute(schema.APPOINTMENT_TABLE)
         self.cursor.execute(schema.BILL_TABLE)
         self.conn.commit()

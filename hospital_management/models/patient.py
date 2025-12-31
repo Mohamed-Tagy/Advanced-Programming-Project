@@ -1,4 +1,4 @@
-from models.person import Person
+from hospital_management.models.person import Person
 
 class Patient(Person):
     def __init__(self, patient_id, name, age, gender,
@@ -28,14 +28,12 @@ class Patient(Person):
         self.__assigned_doctor = doctor_id
         return True
 
-
     def discharge(self, discharge_date, doctor_id):
         if not self.is_admitted():
             raise ValueError("Patient is not currently admitted")
         self.__discharge_date = discharge_date
         self.__assigned_doctor = doctor_id
         return True
-
 
     def add_allergy(self, allergy):
         if allergy not in self.__allergies:
@@ -51,17 +49,16 @@ class Patient(Person):
     def is_admitted(self):
         return self.__admission_date is not None and self.__discharge_date is None
 
-    def to_dict(self):
-        return {
-            "id": self.person_id,
-            "name": self.name,
-            "age": self.age,
-            "gender": self.gender,
+    def to_dict(self) -> dict:
+        base_dict = super().to_dict()  # Include base person info
+        base_dict.update({
             "blood_type": self.blood_type,
             "allergies": list(self.__allergies),
             "medical_history": list(self.__medical_history),
+            "medical_notes": list(self.__medical_notes),
             "admitted": self.is_admitted(),
             "admission_date": self.__admission_date,
             "discharge_date": self.__discharge_date,
             "assigned_doctor": self.__assigned_doctor
-        }
+        })
+        return base_dict
