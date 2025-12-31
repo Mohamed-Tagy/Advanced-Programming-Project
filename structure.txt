@@ -1,0 +1,112 @@
+Folder PATH listing
+Volume serial number is 1E64-6141
+C:\USERS\MIDOM\DESKTOP\HOSPITAL_MANAGEMENT
+¦   app.py
+¦   hospital.db
+¦   README.md
+¦   structure.txt
+¦   
++---backend
+¦   ¦   .gitignore
+¦   ¦   main.py
+¦   ¦   README.md
+¦   ¦   requirements.txt
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---controllers
+¦   ¦   ¦   admin_controller.py
+¦   ¦   ¦   appointment_controller.py
+¦   ¦   ¦   auth_controller.py
+¦   ¦   ¦   base_controller.py
+¦   ¦   ¦   billing_controller.py
+¦   ¦   ¦   doctor_controller.py
+¦   ¦   ¦   patient_controller.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---__pycache__
+¦   ¦           admin_controller.cpython-314.pyc
+¦   ¦           appointment_controller.cpython-314.pyc
+¦   ¦           auth_controller.cpython-314.pyc
+¦   ¦           base_controller.cpython-314.pyc
+¦   ¦           billing_controller.cpython-314.pyc
+¦   ¦           doctor_controller.cpython-314.pyc
+¦   ¦           patient_controller.cpython-314.pyc
+¦   ¦           __init__.cpython-314.pyc
+¦   ¦           
+¦   +---database
+¦   ¦   ¦   db_manager.py
+¦   ¦   ¦   schema.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---__pycache__
+¦   ¦           db_manager.cpython-314.pyc
+¦   ¦           schema.cpython-314.pyc
+¦   ¦           __init__.cpython-314.pyc
+¦   ¦           
+¦   +---models
+¦   ¦   ¦   admin.py
+¦   ¦   ¦   appointment.py
+¦   ¦   ¦   billing.py
+¦   ¦   ¦   doctor.py
+¦   ¦   ¦   patient.py
+¦   ¦   ¦   person.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---__pycache__
+¦   ¦           admin.cpython-314.pyc
+¦   ¦           appointment.cpython-314.pyc
+¦   ¦           billing.cpython-314.pyc
+¦   ¦           doctor.cpython-314.pyc
+¦   ¦           patient.cpython-314.pyc
+¦   ¦           person.cpython-314.pyc
+¦   ¦           __init__.cpython-314.pyc
+¦   ¦           
+¦   +---tests
+¦   ¦       test_manual_admin.py
+¦   ¦       test_manual_billing.py
+¦   ¦       test_manual_doctor.py
+¦   ¦       test_manual_patient.py
+¦   ¦       test_models.py
+¦   ¦       test_patient_db.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---__pycache__
+¦           __init__.cpython-314.pyc
+¦           
++---gui
+    ¦   __init__.py
+    ¦   
+    +---layouts
+    ¦   ¦   admin_layout.py
+    ¦   ¦   user_layout.py
+    ¦   ¦   
+    ¦   +---__pycache__
+    ¦           admin_layout.cpython-314.pyc
+    ¦           user_layout.cpython-314.pyc
+    ¦           
+    +---pages
+    ¦   ¦   admin_dashboard.py
+    ¦   ¦   appointment_page.py
+    ¦   ¦   billing_page.py
+    ¦   ¦   doctor_page.py
+    ¦   ¦   login_page.py
+    ¦   ¦   patient_page.py
+    ¦   ¦   signup_page.py
+    ¦   ¦   user_dashboard.py
+    ¦   ¦   __init__.py
+    ¦   ¦   
+    ¦   +---__pycache__
+    ¦           admin_dashboard.cpython-314.pyc
+    ¦           appointment_page.cpython-314.pyc
+    ¦           billing_page.cpython-314.pyc
+    ¦           doctor_page.cpython-314.pyc
+    ¦           login_page.cpython-314.pyc
+    ¦           patient_page.cpython-314.pyc
+    ¦           signup_page.cpython-314.pyc
+    ¦           user_dashboard.cpython-314.pyc
+    ¦           __init__.cpython-314.pyc
+    ¦           
+    +---__pycache__
+            theme.cpython-314.pyc
+            __init__.cpython-314.pyc
+            
